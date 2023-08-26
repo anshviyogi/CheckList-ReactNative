@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
   View,
@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   ScrollView,
+  StatusBar,
 } from "react-native";
 
 import { TailwindProvider } from "tailwindcss-react-native";
@@ -49,11 +50,12 @@ function App() {
     <TailwindProvider>
       <ScrollView>
         <SafeAreaView style={{ flex: 1 }}>
-          <View className="mt-10">
+          <View className="m-5">
+            <StatusBar backgroundColor={"gray"} />
             {/* INPUT FIELD AND ACTION BUTTON */}
             <View className="flex flex-row">
               <TextInput
-                className="border border-black w-[85%]"
+                className="border border-black w-[85%] p-1 rounded-md"
                 placeholder="Go to Gym"
                 value={message}
                 onChangeText={(e) => {
@@ -63,15 +65,19 @@ function App() {
               {isEdit ? (
                 <Button title="Update" onPress={editHandler} />
               ) : (
-                <Button title="Save" onPress={saveHandler} />
+                <Button
+                  className="rounded-3xl"
+                  title="Save"
+                  onPress={saveHandler}
+                />
               )}
             </View>
 
             {/* List to be displayed*/}
             <View>
-              {list?.map((item) => (
+              {list?.map((item, index) => (
                 <View className="flex-row justify-between px-5 py-2">
-                  <Text>{item?.message}</Text>
+                  <Text key={index}>{item?.message}</Text>
                   <View className="flex-row">
                     <Button
                       title="Edit"
